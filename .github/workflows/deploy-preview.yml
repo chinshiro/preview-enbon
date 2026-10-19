@@ -16,9 +16,9 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          # rsync配置：只写本地源、远程目标，不要写root@ip
           rsync: |
             ./ /www/wwwroot/preview.hk2.enbon.com/
             --archive
             --delete
             --compress
+            --exclude=.git

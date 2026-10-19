@@ -1,0 +1,21 @@
+name: Deploy Preview Server
+on:
+  push:
+    branches: [ main ] # 推送到main分支自动触发部署
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Connect SSH and deploy preview
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /data/www/preview
+            git pull origin main

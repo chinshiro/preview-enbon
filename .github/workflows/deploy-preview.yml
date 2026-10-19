@@ -17,5 +17,5 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            cd /data/www/preview
+            cd /www/wwwroot/preview.hk2.enbon.com
             git pull origin main

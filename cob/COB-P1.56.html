@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COB-P1.56</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: 1080px 1080px; margin: 0; }
+  html, body { background: #000; }
+  body { font-family: "Poppins", "Avenir Next", "Futura", "Century Gothic", "Helvetica Neue", Arial, sans-serif; }
+
+  .page {
+    position: relative;
+    width: 1080px; height: 1080px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  .patch { position: absolute; background: #010101; }
+  .txt { position: absolute; }
+
+  /* ===== Screen: one page per view, click to flip ===== */
+  @media screen {
+    body { overflow: hidden; height: 100vh; cursor: pointer; }
+    .page {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(var(--s, 0.5));
+      display: none;
+    }
+    .page.active { display: block; }
+    .ui {
+      position: fixed; z-index: 50;
+      color: rgba(255,255,255,.85);
+      font-size: 13px; letter-spacing: 2px;
+      font-family: "Poppins", "Avenir Next", sans-serif;
+      user-select: none; pointer-events: none;
+    }
+    .pageno { right: 20px; bottom: 16px; }
+  }
+
+  /* ===== Print / PDF: all pages stacked ===== */
+  @media print {
+    .ui { display: none; }
+    .page { page-break-after: always; break-after: page; }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+  }
+
+  /* P1 cover subtitle */
+  .p1-sub {
+    left: 140px; top: 318px; width: 800px;
+    text-align: center;
+    font-size: 31px; font-weight: 300; color: #f2f2f2;
+    letter-spacing: 0.5px;
+  }
+  .p1-sub b { font-weight: 700; color: #ffffff; }
+
+  /* P3 thickness label */
+  .p3-depth {
+    left: 836px; top: 561px; width: 90px;
+    font-size: 21px; font-weight: 600; color: #ffffff;
+    letter-spacing: 0.3px;
+  }
+
+  /* P4 packaging texts */
+  .p4-body {
+    left: 420px; top: 356px; width: 572px;
+    text-align: right;
+    font-size: 22px; font-weight: 300; color: #e9e9e9;
+    line-height: 33px;
+  }
+  .p4-body b { font-weight: 700; color: #ffffff; }
+  .p4-side {
+    left: 600px; top: 585px; width: 396px;
+    text-align: left;
+    font-size: 15px; font-weight: 300; color: #cfcfcf;
+    line-height: 22px;
+  }
+  .p4-side b { font-weight: 700; color: #ffffff; }
+
+  /* P7 connector subtitle */
+  .p7-sub {
+    left: 140px; top: 314px; width: 800px;
+    text-align: center;
+    font-size: 21px; font-weight: 400; color: #c9c9c9;
+    letter-spacing: 1.2px;
+  }
+
+  /* P10 spec page */
+  .p10-sub {
+    left: 112px; top: 254px; width: 700px;
+    font-size: 20px; font-weight: 400; color: #e0e0e0;
+    letter-spacing: 0.3px;
+  }
+  .spec {
+    position: absolute;
+    left: 185px; top: 312px; width: 730px;
+  }
+  .spec .row {
+    display: flex; align-items: center;
+    height: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.30);
+  }
+  .spec .row:first-child { border-top: 1px solid rgba(255,255,255,0.30); }
+  .spec .lbl {
+    width: 190px; flex: none;
+    font-size: 11.5px; font-weight: 700; color: #ffffff;
+    letter-spacing: 0.2px;
+  }
+  .spec .val {
+    flex: 1;
+    font-size: 11px; font-weight: 400; color: #cccccc;
+    padding-left: 16px;
+    letter-spacing: 0.2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Page 1 : Cover -->
+<div class="page" style="background-image:url('bg/p01.jpg')">
+  <div class="patch" style="left:140px;top:316px;width:800px;height:76px"></div>
+  <div class="txt p1-sub"><b>P1.56</b> Small Pitch Cabinet Front Service</div>
+</div>
+
+<!-- Page 2 : Lighter Weight (parameters already match the manual) -->
+<div class="page" style="background-image:url('bg/p02.jpg')"></div>
+
+<!-- Page 3 : Ultra-thin — depth corrected to 35.5mm -->
+<div class="page" style="background-image:url('bg/p03.jpg')">
+  <div class="patch" style="left:830px;top:556px;width:86px;height:46px"></div>
+  <div class="txt p3-depth">35.5mm</div>
+</div>
+
+<!-- Page 4 : Packaging — per manual section 6 -->
+<div class="page" style="background-image:url('bg/p04.jpg')">
+  <div class="patch" style="left:418px;top:348px;width:590px;height:100px"></div>
+  <div class="txt p4-body"><b>1 pack 4PCS</b> die-cast boxes per carton<br>665*265*405mm, 18kg — saves transportation cost</div>
+  <div class="patch" style="left:586px;top:574px;width:418px;height:74px"></div>
+  <div class="txt p4-side"><b>32PCS</b> 300*168.75 light boards per carton<br>400*355*315mm, weight 13kg</div>
+</div>
+
+<!-- Page 5 : High Refresh Rate / High Grayscale -->
+<div class="page" style="background-image:url('bg/p05.jpg')"></div>
+
+<!-- Page 6 : 16:9 Golden Ratio -->
+<div class="page" style="background-image:url('bg/p06.jpg')"></div>
+
+<!-- Page 7 : Module & Cabinet Connector -->
+<div class="page" style="background-image:url('bg/p07.jpg')">
+  <div class="txt p7-sub">2*30PIN 0.8mm pitch · HUB hardwired</div>
+</div>
+
+<!-- Page 8 : Full Flip-chip COB Design -->
+<div class="page" style="background-image:url('bg/p08.jpg')"></div>
+
+<!-- Page 9 : Installation Case -->
+<div class="page" style="background-image:url('bg/p09.jpg')"></div>
+
+<!-- Page 10 : Specification — per BK-COB 600x337.5 manual (HSP15 / P1.56) -->
+<div class="page" style="background-image:url('bg/p10.jpg')">
+  <div class="patch" style="left:100px;top:244px;width:720px;height:52px"></div>
+  <div class="txt p10-sub">BK-COB 600&#215;337.5 Series &#183; COB Small Pitch Front Service</div>
+  <div class="patch" style="left:176px;top:300px;width:748px;height:606px"></div>
+  <div class="spec">
+    <div class="row"><div class="lbl">Pixel Pitch</div><div class="val">1.56 mm</div></div>
+    <div class="row"><div class="lbl">LED Lamp</div><div class="val">Flip-chip COB (RGB)</div></div>
+    <div class="row"><div class="lbl">Density (dots/m&#178;)</div><div class="val">409600</div></div>
+    <div class="row"><div class="lbl">Brightness</div><div class="val">600 nits (corrected)</div></div>
+    <div class="row"><div class="lbl">IP Rating</div><div class="val">IP54</div></div>
+    <div class="row"><div class="lbl">Refresh Rate (Hz)</div><div class="val">3840</div></div>
+    <div class="row"><div class="lbl">Scan</div><div class="val">1/108 scan</div></div>
+    <div class="row"><div class="lbl">Cabinet Weight</div><div class="val">&#8776;4 kg</div></div>
+    <div class="row"><div class="lbl">Module Size (mm)</div><div class="val">300 &#215; 168.75</div></div>
+    <div class="row"><div class="lbl">Cabinet Size (mm)</div><div class="val">600*337.5*35.5</div></div>
+    <div class="row"><div class="lbl">Module Pixel</div><div class="val">192*108 dots</div></div>
+    <div class="row"><div class="lbl">Cabinet Pixel</div><div class="val">384*216 dots</div></div>
+    <div class="row"><div class="lbl">Max Power</div><div class="val">&#8776;350 W/sqm</div></div>
+    <div class="row"><div class="lbl">Average Power</div><div class="val">&#8776;100 W/sqm</div></div>
+    <div class="row"><div class="lbl">Viewing Angle</div><div class="val">H/V 175&#176;</div></div>
+    <div class="row"><div class="lbl">Contrast</div><div class="val">20000:1</div></div>
+    <div class="row"><div class="lbl">Color Temperature</div><div class="val">3000K &#8211; 15000K</div></div>
+    <div class="row"><div class="lbl">Gray Scale</div><div class="val">14 bit</div></div>
+    <div class="row"><div class="lbl">Receiving Card</div><div class="val">Nova A8S Pro / Nova 3-in-1 / Nova A5S Plus</div></div>
+    <div class="row"><div class="lbl">Connection</div><div class="val">HUB hardwired</div></div>
+    <div class="row"><div class="lbl">Operating Voltage</div><div class="val">AC 100-240V</div></div>
+    <div class="row"><div class="lbl">Work Temperature</div><div class="val">-10 ~ +60 &#176;C / 10% ~ 90% RH</div></div>
+    <div class="row"><div class="lbl">Storage Temperature</div><div class="val">-20 ~ +60 &#176;C / 10% ~ 90% RH</div></div>
+  </div>
+</div>
+
+<div class="ui pageno" id="pageno">01 / 10</div>
+
+<script>
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var pageno = document.getElementById('pageno');
+  var cur = 0;
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function show(i) {
+    cur = Math.max(0, Math.min(pages.length - 1, i));
+    pages.forEach(function (p, k) { p.classList.toggle('active', k === cur); });
+    pageno.textContent = pad(cur + 1) + ' / ' + pad(pages.length);
+  }
+  function fit() {
+    var s = Math.min(window.innerWidth, window.innerHeight) / 1080;
+    document.documentElement.style.setProperty('--s', s);
+  }
+  function next() { show(cur === pages.length - 1 ? 0 : cur + 1); }
+  function prev() { show(cur === 0 ? pages.length - 1 : cur - 1); }
+
+  document.addEventListener('click', function (e) {
+    if (e.clientX < window.innerWidth * 0.25) { prev(); } else { next(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') { show(0); }
+    if (e.key === 'End') { show(pages.length - 1); }
+  });
+  var wheelLock = 0;
+  document.addEventListener('wheel', function (e) {
+    var now = Date.now();
+    if (now - wheelLock < 450) return;
+    if (Math.abs(e.deltaY) < 12) return;
+    wheelLock = now;
+    if (e.deltaY > 0) { next(); } else { prev(); }
+  }, { passive: true });
+  window.addEventListener('resize', fit);
+
+  fit();
+  show(0);
+})();
+</script>
+
+</body>
+</html>
